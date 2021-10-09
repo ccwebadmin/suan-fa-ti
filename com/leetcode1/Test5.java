@@ -2,6 +2,7 @@ package com.leetcode1;
 //给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
 public class Test5 {
     public static void main(String[] args) {
+        //test
         Test5 test =new Test5();
         String s="babad";
         System.out.println(test.longestPalindrome(s));
