@@ -10,7 +10,7 @@ public class toJsonString {
     public static void main(String[] args) {
         JSONObject object = new JSONObject();
 
-        object.put("certno","429001198210210073");
+        object.put("certno","12321312312");
         object.put("psn_name","黄峰");
         object.put("psn_cert_type","01");
         System.out.println(JSON.toJSONString(object));
