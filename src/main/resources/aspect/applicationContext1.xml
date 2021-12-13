@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xmlns xml name space命名空间的缩写-->
+<!--xmlns:xsi xml文件遵守的xml规范，xsi全名：xml schema instance -->
+<!--xsi:schemaLocation 为上面配置的命名空间指定xsd规范文件,这样你在进行下面具体配置的时候就会根据这些xsd规范文件给出相应的提示 -->
+<!--xmlns:aop spring aop的命名空间-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启AspectJ的注解开发，自动代理=====================-->
+    <aop:aspectj-autoproxy/>
+
+    <!--目标类===================-->
+    <bean id="productDao" class="com.spring.aspectJ.demo1.ProductDao"/>
+
+    <!--定义切面-->
+    <bean class="com.spring.aspectJ.demo1.MyAspectAnno"/>
+
+</beans>
