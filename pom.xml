@@ -27,6 +27,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.15</version>
+        </dependency>
         <!-- 常用jsonAPI -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -89,5 +94,5 @@
             <version>4.2.4.RELEASE</version>
         </dependency>
     </dependencies>
-    
+
 </project>
