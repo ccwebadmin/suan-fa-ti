@@ -11,17 +11,10 @@ import java.nio.file.Files;
  */
 public class pdfToBase64 {
     public static void main(String[] args) throws IOException {
-//        String encode = Base64.encode(a);
-    //        File file = new File("D:\\desktop\\image\\参保报错截图Test.pdf");
-//        try (FileOutputStream fos = new FileOutputStream(file)) {
-//            // To be short I use a corrupted PDF string, so make sure to use a valid one if you want to preview the PDF file
-//            String b64 = "JVBERi0xLjUKJYCBgoMKMSAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvRmlyc3QgMTQxL04gMjAvTGVuZ3==";
-//            byte[] decoder = Base64.getDecoder().decode(b64);
-//            fos.write(decoder);
-//            System.out.println("PDF File Saved");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//        String str ="123";
+//        String[] st =str.split(",");
+//        System.out.println(st.length);
+//        System.out.println(st[0]);
         test1();
     }
 
@@ -74,11 +67,21 @@ public class pdfToBase64 {
     }
 
     public static void test1() throws IOException {
-        String path="D:\\desktop\\image\\空白.pdf";
+        String path="C:\\Users\\24234\\Desktop\\新建文件夹\\mac通过虚拟机连接vpn.pdf";
         File file=new File(path);
         byte[] bytes=getBytesByFile(file);
         String fileBase64=Base64.encode(bytes);
-        System.out.println(fileBase64);
+        //本地文件
+        String filePath = "C:/Users/24234/Desktop/pdfbase64.txt"; // 存储文件的路径和文件名
+
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(fileBase64); // 将字符串写入文件
+            fileWriter.close(); // 记得关闭文件流
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         upload(Base64.decode(fileBase64),"D://","共产党宣言.pdf");
     }
 }
