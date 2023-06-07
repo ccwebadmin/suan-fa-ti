@@ -22,7 +22,7 @@ public class MyTreadPool {
     }
 
     public static class RunnableTask implements Runnable {
-        private String message;
+        private final String message;
 
         public RunnableTask(String message) {
             this.message = message;

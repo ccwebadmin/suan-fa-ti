@@ -8,11 +8,7 @@ public class MyRunnable implements Runnable{
     @Override
     public void run() {
         System.out.println("Runnable run");
-    }
-
-    public static void main(String[] args) {
-        MyRunnable myRunnable = new MyRunnable();
-        Thread thread = new Thread(myRunnable);
-        thread.start();
+        //测试线程里运行报错是否会影响主线程
+        System.out.println(1/0);
     }
 }
