@@ -19,7 +19,7 @@ public class MyTreadMethodWait {
 
             @Override
             public void run() {
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     synchronized (LOCK) {
                         while (item == MAX_COUNT) { // 缓冲区满了，生产者线程等待
                             try {
@@ -45,7 +45,7 @@ public class MyTreadMethodWait {
 
             @Override
             public void run() {
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     synchronized (LOCK) {
                         while (item == 0) { // 缓冲区为空，消费者线程等待
                             try {
@@ -73,7 +73,7 @@ public class MyTreadMethodWait {
             consumerThread1.start();
             consumerThread2.start();
 
-            Thread.sleep(300); // 运行 10 秒钟
+            Thread.sleep(300); // 运行 0.3秒钟
             producerThread1.interrupt(); // 中断生产者线程1
             producerThread2.interrupt(); // 中断生产者线程2
             consumerThread1.interrupt(); // 中断消费者线程1
