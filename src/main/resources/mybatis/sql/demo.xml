@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 绑定的命名空间  路径和类名-->
+<mapper namespace="xxx.xx.xx.xxDAO">
+
+    <!-- 复用的查询字段  作用理解为插入的一段SQL -->
+    <sql id="xx_column">
+        sys_resu_d.RESU_ID,
+        sys_resu_d.RESU_CODG,
+        sys_resu_d.RESU_NAME,
+        sys_resu_d.RESU_TYPE,
+        sys_resu_d.RESU_IMG,
+        sys_resu_d.RESU_PATH,
+        sys_resu_d.RESU_ICON,
+        sys_resu_d.SEQ,
+        sys_resu_d.DSCR,
+        sys_resu_d.SUBSYS_ID,
+        sys_resu_d.PRNT_RESU_ID,
+        sys_resu_d.VALI_FLAG,
+        sys_resu_d.LEAFNOD_FLAG,
+        sys_resu_d.PUB_COMT_FLAG
+    </sql>
+
+    <!-- 查询使用的参数方式1 直接获取入参DTO里的属性-->
+    <select id="nameMethod1" parameterType="xxx.xx.xx.xxDTO"
+            resultType="xxx.xx.xx.xxDTO">
+        SELECT
+        <include refid="xx_column"></include>
+        ,
+        SYS_SUBSYS_D.SYS_PATH,
+        SYS_SUBSYS_D.SUBSYS_NAME,
+        SYS_SUBSYS_D.SUBSYS_CODG
+        FROM
+        SYS_RESU_D INNER JOIN SYS_SUBSYS_D ON SYS_RESU_D.SUBSYS_ID = SYS_SUBSYS_D.SUBSYS_ID
+        WHERE
+        SYS_RESU_D.VALI_FLAG = #{valiFlag,jdbcType=VARCHAR}
+        AND SYS_SUBSYS_D.VALI_FLAG = #{valiFlag,jdbcType=VARCHAR}
+        <if test="resuType != null and resuType != ''">
+            AND SYS_RESU_D.RESU_TYPE = #{resuType,jdbcType=VARCHAR}
+        </if>
+        <if test="subsysId != null and subsysId != ''">
+            AND SYS_SUBSYS_D.SUBSYS_ID = #{subsysId,jdbcType=VARCHAR}
+        </if>
+        AND (RESU_ID IN (
+        SELECT RESU_ID FROM SYS_ROLE_PERM_D
+        <!--<wehre>修饰符后面可以加 and，MyBatis会去处理是否添加and-->
+        <where>
+            <if test="authType != null and authType != ''">
+                AND AUTH_TYPE = #{authType,jdbcType=VARCHAR}
+            </if>
+            AND ROLE_ID IN (SELECT ROLE_ID FROM SYS_ROLE_UACT_D WHERE UACT_ID = #{uactId,jdbcType=VARCHAR}
+            <if test="roleType != null and roleType != ''">
+                AND ROLE_TYPE = #{roleType,jdbcType=VARCHAR}
+            </if>
+            )
+        </where>
+        )
+        OR SYS_RESU_D.PUB_COMT_FLAG = 1)
+        ORDER BY SYS_RESU_D.SEQ ASC
+    </select>
+</mapper>
