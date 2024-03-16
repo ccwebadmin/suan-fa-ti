@@ -67,12 +67,12 @@ public class pdfToBase64 {
     }
 
     public static void test1() throws IOException {
-        String path="C:\\Users\\24234\\Desktop\\新建文件夹\\mac通过虚拟机连接vpn.pdf";
+        String path="C:\\Users\\Lenovo\\Desktop\\测试PDF\\测试.pdf";
         File file=new File(path);
         byte[] bytes=getBytesByFile(file);
         String fileBase64=Base64.encode(bytes);
         //本地文件
-        String filePath = "C:/Users/24234/Desktop/pdfbase64.txt"; // 存储文件的路径和文件名
+        String filePath = "C:/Users/Lenovo/Desktop/测试PDF/pdfbase64.txt"; // 存储文件的路径和文件名
 
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -82,6 +82,6 @@ public class pdfToBase64 {
             e.printStackTrace();
         }
 
-        upload(Base64.decode(fileBase64),"D://","共产党宣言.pdf");
+        upload(Base64.decode(fileBase64),"C://Users//Lenovo//Desktop//测试PDF","共产党宣言.pdf");
     }
 }

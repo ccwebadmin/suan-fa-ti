@@ -1,0 +1,5 @@
+1.list遍历
+           pricListDTOS.forEach(t -> {
+                ItemAttrDTO dto = new ItemAttrDTO();
+                逻辑...
+           });

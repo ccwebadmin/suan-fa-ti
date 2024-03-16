@@ -1,0 +1,19 @@
+        //查询 Wrapper提供的查询方法
+        Wrapper<PricTaskInfoDO> par = new EntityWrapper<>();
+        par.eq("task_obj_id", servitemId);
+        par.eq("task_type", ItemManageUtils.TASK_TYPE);
+        par.eq(VALI_FLAG, Digit.VALI_FLAG_VALID.getDigstr());
+        par.isNull("next_node");
+        List<PricTaskInfoDO> list = this.pricTaskInfoDAO.selectList(par);
+
+        //根据条件拼装参数
+        EntityWrapper<CfgElemInfoBDO> wrapper = new EntityWrapper<>();
+        wrapper.eq(null != cfgElemInfoDTO.getElemId() && StringUtils.isNotBlank(cfgElemInfoDTO.getElemId())
+                , "ELEM_ID", cfgElemInfoDTO.getElemId())
+                .like(null != cfgElemInfoDTO.getElemName() && StringUtils.isNotBlank(cfgElemInfoDTO.getElemName())
+                        , "ELEM_NAME", cfgElemInfoDTO.getElemName(), SqlLike.DEFAULT)
+                .like(null != cfgElemInfoDTO.getElemVal() && StringUtils.isNotBlank(cfgElemInfoDTO.getElemVal())
+                        , "ELEM_VAL", cfgElemInfoDTO.getElemVal(), SqlLike.DEFAULT).eq("VALI_FLAG", "1")
+                .eq(null != cfgElemInfoDTO && StringUtils.isNotBlank(cfgElemInfoDTO.getRlsFlag())
+                        , "RLS_FLAG", cfgElemInfoDTO.getRlsFlag());
+        wrapper.orderBy("DISP_SEQ", false);

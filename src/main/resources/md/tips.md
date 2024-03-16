@@ -68,6 +68,24 @@ public IQuery<SysSubsysDTO> querySubSystem(SysSubsysFindDTO dto) {
 
 ```
 
+```java
+ //查询
+        List<ServitemPsnSalDDO> listServitemPsnSal = servitemPsnSalDDAO.selectList(new EntityWrapper<ServitemPsnSalDDO>()
+                .eq(VALI_FLAG, Digit.VALI_FLAG_VALID.getDigstr())
+                .eq(SERVITEM_ID, servitemId)
+                .eq("ver", ver)
+        );
+        listServitemPsnSal.forEach(item -> {
+        ItemCostDTO itemCostDTO = new ItemCostDTO();
+        BeanUtils.copyProperties(item, itemCostDTO);
+        itemCostDTO.setItemCostId(item.getSalId());
+        itemCostDTO.setCostType("4");
+        itemCostDTO.setPsnLvName(null == itemCostDTO.getPsnLv() ? "" : dictService.getValue("psn_lv", itemCostDTO.getPsnLv(), null));
+        itemCostDTO.setMedPsnTypeName(null == itemCostDTO.getMedPsnType() ? "" : dictService.getValue("med_psn_type", itemCostDTO.getMedPsnType(), null));
+        listItemCost.add(itemCostDTO);
+        });
+        
+```
 ## list中判空指针的地方
 ```java
 // 不报npe       
