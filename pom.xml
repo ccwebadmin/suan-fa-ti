@@ -151,8 +151,13 @@
             <artifactId>esapi</artifactId>
             <version>2.5.3.1</version> <!-- Use the latest version available -->
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
