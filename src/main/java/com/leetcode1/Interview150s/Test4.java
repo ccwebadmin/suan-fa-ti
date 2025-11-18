@@ -1,4 +1,4 @@
-package com.leetcode1.test1to100;
+package com.leetcode1.Interview150s;
 
 /**
  *
